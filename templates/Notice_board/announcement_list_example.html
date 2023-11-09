@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>Title</title>
+</head>
+<body>
+{% for announcement in announcement_list %}
+    {{ announcement.title }} <div><img src="media/{{ announcement.image }}"></div>
+{% endfor %}
+</body>
+</html>
+<div class="box col5 cat1"><a href="media/{{ announcement.image }}" rel="prettyPhoto" title="{{ announcement.title }}"><span class="overlay zoom"></span><img src="media/{{ announcement.image }}" alt=""></a></div>
+<div class="box col5 cat2"><a href="portfolio-post.html"><span class="overlay details"></span><img src="{% static 'style/images/art/p2.jpg' %}" alt="" /></a></div>
+<div class="box col5 cat1"><a href="{% static 'style/images/art/p3.jpg' %}" rel="prettyPhoto" title="this is title"><span class="overlay zoom"></span><img src="{% static 'style/images/art/p3.jpg' %}" alt="" /></a></div>
+<div class="box col5 cat2"><a href="{% static 'style/images/art/p4.jpg' %}" rel="prettyPhoto" title="this is title"><span class="overlay zoom"></span><img src="{% static 'style/images/art/p4.jpg' %}" alt="" /></a></div>
+<div class="box col5 cat1"><a href="portfolio-post.html"><span class="overlay details"></span><img src="{% static 'style/images/art/p5.jpg' %}" alt="" /></a></div>
+<div class="box col5 cat2"><a href="{% static 'style/images/art/p6.jpg' %}" rel="prettyPhoto" title="this is title"><span class="overlay zoom"></span><img src="{% static 'style/images/art/p6.jpg' %}" alt="" /></a></div>
+<div class="box col5 cat1"><a href="{% static 'style/images/art/p7.jpg' %}" rel="prettyPhoto" title="this is title"><span class="overlay zoom"></span><img src="{% static 'style/images/art/p7.jpg' %}" alt="" /></a></div>
+<div class="box col5 cat2"><a href="portfolio-post.html"><span class="overlay details"></span><img src="{% static 'style/images/art/p8.jpg' %}" alt="" /></a></div>
+<div class="box col5 cat2"><a href="{% static 'style/images/art/p9.jpg' %}" rel="prettyPhoto" title="this is title"><span class="overlay zoom"></span><img src="{% static 'style/images/art/p9.jpg' %}" alt="" /></a></div>
+<div class="box col5 cat1"><a href="{% static 'style/images/art/p10.jpg' %}" rel="prettyPhoto" title="this is title"><span class="overlay zoom"></span><img src="{% static 'style/images/art/p10.jpg' %}" alt="" /></a></div>
+<div class="box col5 cat2"><a href="portfolio-post.html"><span class="overlay details"></span><img src="{% static 'style/images/art/p11.jpg' %}" alt="" /></a></div>
+<div class="box col5 cat1"><a href="{% static 'style/images/art/p12.jpg' %}" rel="prettyPhoto" title="this is title"><span class="overlay zoom"></span><img src="{% static 'style/images/art/p12.jpg' %}" alt="" /></a></div>
+<div class="box col5 cat3"><a href="http://vimeo.com/25518056" rel="prettyPhoto" title="this is title"><span class="overlay play"></span><img src="{% static 'style/images/art/p13.jpg' %}" alt="" /></a></div>
+<div class="box col5 cat3"><a href="http://vimeo.com/6757600" rel="prettyPhoto" title="this is title"><span class="overlay play"></span><img src="{% static 'style/images/art/p14.jpg' %}" alt="" /></a></div>
+
+
+		  <div class="box col5 cat1">
+			<a href="media/{{ announcement.image }}" rel="prettyPhoto" title="{{ announcement.title }}">
+				<span class="overlay zoom"></span>
+				<img src="media/{{ announcement.image }}" alt="" />
+			</a>
+			<h2>{{ announcement.title }}</h2>
+			<p>{{ announcement.content }}</p>
+		</div>
+		
+		<div class="box col5 cat1"><a href="media/{{ announcement.image }}" rel="prettyPhoto" title="{{ announcement.title }}"><span class="overlay zoom"></span><img src="media/{{ announcement.image }}" alt="" /></a></div>
+
+		
+		<div class="box col5 {{ announcement.category }}">
+    <a href="media/{{ announcement.image }}" rel="prettyPhoto">
+        <img src="media/{{ announcement.image }}" alt="" />
+    </a>
+    <img src="media/{{ announcement.image }}" rel="prettyPhoto" />
+    <h2>{{ announcement.title }}</h2>
+    <p>{{ announcement.content }}</p>
+
+
+</div>
+
+
+		{% for announcement in announcement_list %}
+
+        <div class="box col5 {{ announcement.category }}">
+            <a href="media/{{ announcement.image }}" rel="prettyPhoto">
+                <img src="media/{{ announcement.image }}" alt="" />
+            </a>
+            <h2>{{ announcement.title }}</h2>
+            <p>{{ announcement.content }}</p>
+        </div>

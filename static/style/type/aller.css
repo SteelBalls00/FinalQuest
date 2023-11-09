@@ -1,0 +1,52 @@
+@font-face {
+    font-family: 'AllerRegular';
+    src: url('aller/aller_rg-webfont.eot?') format('eot'),
+         url('aller/aller_rg-webfont.woff') format('woff'),
+         url('aller/aller_rg-webfont.ttf') format('truetype'),
+         url('aller/aller_rg-webfont.svg#webfont05QLJQmH') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+h1, h2, h3, h4, h5, h6 {
+	font-family: 'AllerRegular';
+}
+h1 {
+	font-size: 22px;
+	line-height: 26px;
+}
+h2 {
+	font-size: 20px;
+	line-height: 24px;
+}
+h3 {
+	font-size: 18px;
+	line-height: 22px;
+}
+h4 {
+	font-size: 16px;
+	line-height: 20px;
+}
+h5 {
+	font-size: 14px;
+	line-height: 20px;
+}
+h6 {
+	font-size: 12px;
+	line-height: 18px;
+}
+.dropcap {
+	font-size:45px;
+	font-family: 'AllerRegular';
+}
+.menu {
+	font-family: 'AllerRegular';
+}
+.menu ul {
+	font-family: 'AllerRegular';
+}
+
+#filtering-nav li {
+	font-family: 'AllerRegular';
+}

@@ -1,0 +1,45 @@
+{% extends 'Notice_board/base.html' %}
+{% block content %}
+{% load static %}
+
+  <!-- Begin Container -->
+  <div id="container" class="opacity">
+    <h2>Доска объявлений для RageShadowFactory</h2>
+    <p>Тут какой-то текст.</p>
+
+    <!-- Begin Portfolio -->
+      <div id="portfolio">
+
+        <div class="clear"></div>
+
+                    <h2>{{ announcement_detail.category }}</h2>
+
+{% if announcement_detail.image %}
+    <a href="{{ image_url }}" rel="prettyPhoto">
+        <img src="{{ image_url }}" alt="" />
+    </a>
+{% endif %}
+
+            <h2>{{ announcement_detail.title }}</h2>
+            <p>{{ announcement_detail.content }}</p>
+
+
+
+        </div>
+        <!-- .wrap -->
+    </div>
+    <!-- End Portfolio -->
+
+    <div class="clear"></div>
+    <div id="footer">
+      <div class="footer-top"></div>
+      <!-- Divider -->
+      <div class="clear"></div>
+    </div>
+  </div>
+  <!-- End Container -->
+<!-- End Wrapper -->
+
+<script type="text/javascript" src="{% static 'style/js/scripts.js' %}"></script>
+
+{% endblock content %}

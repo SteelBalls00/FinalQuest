@@ -231,30 +231,11 @@ $.fn.imagesLoaded = function(a) {
 		{% for announcement in announcement_list %}
 
         <div class="box col5 {{ announcement.category }}">
-
-
-
-        <table style="border-collapse:collapse;width:100%;">
-  <tbody>
-    <tr>
-      <td>
-          <img src="http://127.0.0.1:8000/media/{{ announcement.image }}" title="" alt="" />
-        </td>
-    </tr>
-    <tr>
-      <td><h2>{{ announcement.title }}</h2>
-        </td>
-    </tr>
-    <tr>
-      <td><p>{{ announcement.content }}</p>
-        </td>
-    </tr>
-    <tr>
-      <td><button disabled class="inactive-button">Вы откликнулись</button>
-        </td>
-    </tr>
-  </tbody>
-</table>
+            <a href="media/{{ announcement.image }}" rel="prettyPhoto">
+                <img src="media/{{ announcement.image }}" alt="" />
+            </a>
+            <h2>{{ announcement.title }}</h2>
+            <p>{{ announcement.content }}</p>
         </div>
 
 

@@ -1,119 +1,62 @@
 {% extends 'Notice_board/base.html' %}
 {% block content %}
 {% load static %}
+{% load custom_tags %}
 
   
   <!-- Begin Container -->
   <div id="container" class="opacity">
     <h2>Доска объявлений для RageShadowFactory</h2>
     <p>Тут какой-то текст.</p>
+  <hr size="10">
+
+  <form action="" method="get">
+       {# Переменная, которую мы передали через контекст, может сгенерировать нам форму с полями #}
+       {{ filterset.form.as_p }}
+       {# Добавим кнопку отправки данных формы #}
+       <input type="submit" value="Найти" />
+   </form>
     
     <!-- Begin Portfolio -->
-      <div id="portfolio">
-        <ul id="filtering-nav">
-          <li>Filter:</li>
-          <li><a class="all" href="#all">All</a></li>
-          <li><a class="Tank" href="#Tank">Tank</a></li>
-          <li><a class="Hiller" href="#Hiller">Hiller</a></li>
-          <li><a class="DD" href="#DD">DD</a></li>
-		  <li><a class="Merchants" href="#Merchants">Merchants</a></li>
-          <li><a class="Guildmasters" href="#Guildmasters">Guildmasters</a></li>
-          <li><a class="Questgivers" href="#Questgivers">Questgivers</a></li>
-		  <li><a class="Blacksmiths" href="#Blacksmiths">Blacksmiths</a></li>
-		  <li><a class="Tanners" href="#cat4">Tanners</a></li>
-		  <li><a class="Potions_brewers" href="#Potions_brewers">Potions_brewers</a></li>
-		  <li><a class="Spell_masters" href="#Spell_masters">Spell_masters</a></li>
+  {% if announcement_list %}
+{% for announcement in announcement_list %}
 
-        </ul>
-        <div class="clear"></div>
-        <div class="items">
-		{% for announcement in announcement_list %}
+  <div>
+    <h1><a href="http://127.0.0.1:8000/announcements/{{ announcement.pk }}">{{ announcement.title|truncatechars:50 }}</a></h1>
+    <p>{{ announcement.content|truncatechars:80 }}</p>
+      <br>
+    <span class="date">Категория: {{ announcement.category }} от {{ announcement.time_create }}</span>
+  <hr>
+  <br>
+  </div>
 
-        <div class="box col5 {{ announcement.category }}">
-        {% if announcement.image %}
-            <a href="media/{{ announcement.image }}" rel="prettyPhoto">
-                <img src="media/{{ announcement.image }}" alt="" />
-            </a>
-            {% endif %}
-            <h2><a href="http://127.0.0.1:8000/{{ announcement.pk }}">{{ announcement.title }}</a></h2>
-            <p>{{ announcement.content }}</p>
-        </div>
+{% endfor %}
+         {% else %}
+       <h2>Объявлений нет!</h2>
+   {% endif %}
 
+  {# Добавляем пагинацию на страницу #}
+   {% if page_obj.has_previous %}
+       {# Для каждой ссылки пагинации указываем обработку через новый тег #}
+       <a href="?{% url_replace page=1 %}">1</a>
+       {% if page_obj.previous_page_number != 1 %}
+           ...
+           <a href="?{% url_replace page=page_obj.previous_page_number %}">{{ page_obj.previous_page_number }}</a>
+       {% endif %}
+   {% endif %}
 
-		{% endfor %}
-        </div>
-        <!-- .wrap --> 
-    </div>
-    <!-- End Portfolio -->
+   {{ page_obj.number }}
+
+   {% if page_obj.has_next %}
+       <a href="?{% url_replace page=page_obj.next_page_number %}">{{ page_obj.next_page_number }}</a>
+       {% if paginator.num_pages != page_obj.next_page_number %}
+           ...
+           <a href="?{% url_replace page=page_obj.paginator.num_pages %}">{{ page_obj.paginator.num_pages }}</a>
+       {% endif %}
+   {% endif %}
+
     
-    <div class="clear"></div>
-    <div id="footer">
-      <div class="footer-top"></div>
-      <!-- Divider -->
-      <div class="one-fourth">
-        <h3>Latest Posts</h3>
-        <ul class="latest-posts">
-          <li><span class="date"><em class="day">22</em><em class="month">Jun</em></span> <a href="#">Vivamus soder pharetra libero atincidunt</a> </li>
-          <li><span class="date"><em class="day">14</em><em class="month">May</em></span> <a href="#">Vivamus soder pharetra libero atincidunt</a> </li>
-          <li><span class="date"><em class="day">11</em><em class="month">May</em></span> <a href="#">Vivamus soder pharetra libero atincidunt</a> </li>
-          <li><span class="date"><em class="day">08</em><em class="month">Apr</em></span> <a href="#">Vivamus soder pharetra libero atincidunt</a> </li>
-        </ul>
-      </div>
-      <div class="one-fourth">
-        <h3>Flickr</h3>
-        <ul class="flickr">
-          <li><a href="#"><img src="{% static 'style/images/art/f1.jpg' %}" alt="" /></a></li>
-          <li><a href="#"><img src="{% static 'style/images/art/f2.jpg' %}" alt="" /></a></li>
-          <li><a href="#"><img src="{% static 'style/images/art/f3.jpg' %}" alt="" /></a></li>
-          <li><a href="#"><img src="{% static 'style/images/art/f4.jpg' %}" alt="" /></a></li>
-          <li><a href="#"><img src="{% static 'style/images/art/f5.jpg' %}" alt="" /></a></li>
-          <li><a href="#"><img src="{% static 'style/images/art/f6.jpg' %}" alt="" /></a></li>
-          <li><a href="#"><img src="{% static 'style/images/art/f7.jpg' %}" alt="" /></a></li>
-          <li><a href="#"><img src="{% static 'style/images/art/f8.jpg' %}" alt="" /></a></li>
-          <li><a href="#"><img src="{% static 'style/images/art/f9.jpg' %}" alt="" /></a></li>
-        </ul>
-      </div>
-      <div class="one-fourth">
-        <h3>Twitter</h3>
-        <div id="twitter-wrapper">
-          <div id="twitter"></div>
-          <span class="username"><a href="http://twitter.com/elemisdesign">→ Follow @elemisdesign</a></span> </div>
-      </div>
-      <div class="one-fourth last">
-        <h3>Get in Touch</h3>
-        <!-- Form -->
-        <div class="form-container">
-          <form class="forms" action="contact/form-handler.php" method="post">
-            <fieldset>
-              <ol>
-                <li class="form-row text-input-row">
-                  <label>Name*</label>
-                  <input type="text" name="name" value="" class="text-input required" title="" />
-                </li>
-                <li class="form-row text-input-row">
-                  <label>Email*</label>
-                  <input type="text" name="email" value="" class="text-input required email" title="" />
-                </li>
-                <li class="form-row text-area-row">
-                  <textarea name="message" class="text-area required"></textarea>
-                </li>
-                <li class="form-row hidden-row">
-                  <input type="hidden" name="hidden" value="" />
-                </li>
-                <li class="button-row">
-                  <input type="submit" value="Submit" name="submit" class="btn-submit" />
-                </li>
-              </ol>
-              <input type="hidden" name="v_error" id="v-error" value="Required" />
-              <input type="hidden" name="v_email" id="v-email" value="Enter a valid email" />
-            </fieldset>
-          </form>
-          <div class="response"></div>
-        </div>
-        <!-- End Form --> 
-      </div>
-      <div class="clear"></div>
-    </div>
+
   </div>
   <!-- End Container -->
   

@@ -21,7 +21,11 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('Notice_board.urls'))
+    # path('', include('Notice_board.urls')),
+    path('', include('protect.urls')),
+    path('sign/', include('sign.urls')),
+    path('accounts/', include('allauth.urls')),
+    path('announcements/', include('Notice_board.urls')),
 ]
 
 if settings.DEBUG:

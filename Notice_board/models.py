@@ -2,6 +2,7 @@ import os
 
 from django.db import models
 from django.contrib.auth.models import User
+from django.urls import reverse
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.PROTECT, verbose_name='имя')
@@ -58,9 +59,13 @@ class Announcement(models.Model):
     video = models.FileField(upload_to=user_video_path, null=True, blank=True)
     time_create = models.DateTimeField(auto_now_add=True, verbose_name='Дата создания')
     time_update = models.DateTimeField(auto_now=True, verbose_name='Дата изменения')
+    email_confirmed = models.BooleanField(default=False)
 
     def __str__(self):
-        return self.title
+        return f'{self.title}: {self.content[:10]}'
+
+    def get_absolute_url(self):
+        return reverse('announcement_detail', args=[str(self.id)])
 
 
 class Response(models.Model):
@@ -68,5 +73,7 @@ class Response(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='Response_user')
     content = models.TextField(max_length=4048, default='', help_text='текст отлкика')
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='Дата отклика')
-    active = models.BooleanField(default=False)
+    accepted = models.BooleanField(default=False)
 
+    def __str__(self):
+        return f'Reaction on {self.user}\'s {self.announcement}'

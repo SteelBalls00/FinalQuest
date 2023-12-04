@@ -161,47 +161,29 @@ $.fn.imagesLoaded = function(a) {
   </div>
   <div class="clear"></div>
   <!-- Begin Menu -->
+        {% if not email_not_confirmed %}
+
   <div id="menu" class="menu opacity">
     <ul>
-      <li><a href="index.html">Home</a></li>
-      <li><a href="index.html">Sliders</a>
-      	<ul>
-      	<li><a href="index.html">Evolution Explode</a></li>
-      	<li><a href="index2.html">Evolution Random</a></li>
-      	<li><a href="index3.html">Awkward Fade</a></li>
-      	<li><a href="index4.html">Awkward Slide</a></li>
-      	</ul>
+      <li><a href="http://127.0.0.1:8000/announcements/">Главная</a></li>
+      <li><a href="http://127.0.0.1:8000/announcements/create">Создать новость</a>
+
       </li>
-      <li><a href="portfolio.html" class="active">Portfolio</a>
-        <ul>
-        	<li><a href="portfolio.html">Portfolio 5 Columns</a></li>
-      	  <li><a href="portfolio-post.html">Portfolio Post</a></li>
-        </ul>
-      </li>
-      <li><a href="blog.html">Blog</a>
-        <ul>
-      	  <li><a href="post.html">Blog Post</a></li>
-        </ul>
-      </li>
-      <li><a href="fullwidth.html">Pages</a>
-        <ul>
-      	  <li><a href="fullwidth.html">Full Width Page</a></li>
-      	  <li><a href="pagewithsidebar.html">Page with Sidebar</a></li>
-        </ul>
-      </li>
-      <li><a href="button-boxes-images.html">Styles</a>
-      	<ul>
-      	  <li><a href="button-boxes-images.html">Buttons Boxes Images</a></li>
-      	  <li><a href="columns.html">Columns</a></li>
-      	  <li><a href="typography.html">Typography</a></li>
-          <li><a href="tab-toggle-table.html">Tabs Toggle Tables</a></li>
-          <li><a href="testimonials.html">Testimonials</a></li>
-        </ul>
-      </li>
-      <li><a href="contact.html">Contact</a></li>
+      <li><a href="http://127.0.0.1:8000/" class="active">Ваш профиль</a></li>
+
     </ul>
     <br style="clear: left" />
   </div>
+            {% else %}
+        <div id="menu" class="menu opacity">
+    <ul>
+      <li><a href="http://127.0.0.1:8000/announcements/">Главная</a></li>
+      <li><a href="http://127.0.0.1:8000/" class="active">Для создания объявлений и откликов подтвердите эленктронную почту</a></li>
+
+    </ul>
+    <br style="clear: left" />
+  </div>
+{% endif %}
   <!-- End Menu -->
 <body>
 {% block content %}

@@ -1,0 +1,16 @@
+{% extends 'Notice_board/base.html' %}
+{% block content %}
+{% load static %}
+<form action="" method="post">
+{% csrf_token %}
+
+<table>
+
+    {{ form.as_p }}
+
+</table>
+<input type="submit" value="Сохранить">
+</form>
+
+<script type="text/javascript" src="{% static 'style/js/scripts.js' %}"></script>
+{% endblock content %}

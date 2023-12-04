@@ -2,18 +2,7 @@
 {% block content %}
 {% load static %}
 
-  <!-- Begin Container -->
   <div id="container" class="opacity">
-    <h2>Доска объявлений для RageShadowFactory</h2>
-    <p>Тут какой-то текст.</p>
-
-    <!-- Begin Portfolio -->
-      <div id="portfolio">
-
-        <div class="clear"></div>
-
-                    <h2>{{ announcement_detail.category }}</h2>
-
 {% if announcement_detail.image %}
     <a href="{{ image_url }}" rel="prettyPhoto">
         <img src="{{ image_url }}" alt="" />
@@ -24,22 +13,31 @@
             <p>{{ announcement_detail.content }}</p>
 
 
-
-        </div>
-        <!-- .wrap -->
-    </div>
-    <!-- End Portfolio -->
-
-    <div class="clear"></div>
-    <div id="footer">
-      <div class="footer-top"></div>
-      <!-- Divider -->
-      <div class="clear"></div>
-    </div>
   </div>
-  <!-- End Container -->
-<!-- End Wrapper -->
+<form action="" method="post">
+{% csrf_token %}
 
+<table>
+<tr>
+    <th><label for="id_content">Оставить отзыв:</label></th>
+    <td>
+
+      <textarea name="content" cols="40" rows="10" required id="id_content">
+Добрый день! ...</textarea>
+
+    </td>
+    <td>
+        {% if not email_not_confirmed %}
+        <input type="submit" value="Save">
+            {% else %}
+            <button type="button" disabled>Откликнуться</button>
+            <h1>Оставить отклик можно только с подтвержденной электронной почтой</h1>
+        {% endif %}
+    </td>
+  </tr>
+
+</table>
+</form>
 <script type="text/javascript" src="{% static 'style/js/scripts.js' %}"></script>
 
 {% endblock content %}

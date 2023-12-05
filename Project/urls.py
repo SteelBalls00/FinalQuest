@@ -26,6 +26,7 @@ urlpatterns = [
     path('sign/', include('sign.urls')),
     path('accounts/', include('allauth.urls')),
     path('announcements/', include('Notice_board.urls')),
+    path('appointment/', include('Appointment.urls', namespace='appointment')),
 ]
 
 if settings.DEBUG:

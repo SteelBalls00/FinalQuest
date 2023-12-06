@@ -18,6 +18,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
+from . import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -25,6 +26,7 @@ urlpatterns = [
     path('', include('protect.urls')),
     path('sign/', include('sign.urls')),
     path('accounts/', include('allauth.urls')),
+    path('accounts/confirm-email/', views.confirm_email_view, name='confirm-email'),
     path('announcements/', include('Notice_board.urls')),
     path('appointment/', include('Appointment.urls', namespace='appointment')),
 ]

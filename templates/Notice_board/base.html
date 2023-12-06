@@ -161,29 +161,27 @@ $.fn.imagesLoaded = function(a) {
   </div>
   <div class="clear"></div>
   <!-- Begin Menu -->
-        {% if not email_not_confirmed %}
+{% if not user_authenticated %}
 
-  <div id="menu" class="menu opacity">
+<div id="menu" class="menu opacity">
     <ul>
       <li><a href="http://127.0.0.1:8000/announcements/">Главная</a></li>
-      <li><a href="http://127.0.0.1:8000/announcements/create">Создать новость</a>
-
-      </li>
+      <li><a href="http://127.0.0.1:8000/announcements/create">Создать новость</a></li>
       <li><a href="http://127.0.0.1:8000/" class="active">Ваш профиль</a></li>
-
     </ul>
     <br style="clear: left" />
-  </div>
-            {% else %}
-        <div id="menu" class="menu opacity">
+</div>
+
+{% else %}
+<div id="menu" class="menu opacity">
     <ul>
       <li><a href="http://127.0.0.1:8000/announcements/">Главная</a></li>
-      <li><a href="http://127.0.0.1:8000/" class="active">Для создания объявлений и откликов подтвердите эленктронную почту</a></li>
-
+      <li><a href="http://127.0.0.1:8000/" class="active">Войти / Зарегистрироваться</a></li>
     </ul>
     <br style="clear: left" />
   </div>
 {% endif %}
+
   <!-- End Menu -->
 <body>
 {% block content %}

@@ -3,13 +3,15 @@ from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.http import HttpResponseRedirect
 from django.contrib.auth.mixins import PermissionRequiredMixin
+from django.shortcuts import get_object_or_404
 
-from .models import Announcement, Category
+
+from .models import Announcement, Category, UserProfile
 from .filters import AnnouncementFilter
 
 from django.shortcuts import redirect
 from .forms import ResponseForm, AnnouncementForm
-
+from allauth.account.models import EmailAddress
 
 
 class AnnouncementsViev(ListView):
@@ -19,22 +21,26 @@ class AnnouncementsViev(ListView):
     paginate_by = 10
 
     def get_queryset(self):
-        # Получаем обычный запрос
         queryset = super().get_queryset()
-        # Используем наш класс фильтрации.
-        # self.request.GET содержит объект QueryDict
-        # Сохраняем нашу фильтрацию в объекте класса,
-        # чтобы потом добавить в контекст и использовать в шаблоне.
         self.filterset = AnnouncementFilter(self.request.GET, queryset)
-        # Возвращаем из функции отфильтрованный список товаров
         return self.filterset.qs
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        # Добавляем в контекст объект фильтрации.
+        user = self.request.user
         context['filterset'] = self.filterset
-        context['email_not_confirmed'] = not self.request.user.groups.filter(name = 'email_confirmed').exists()
         return context
+
+    def auth_check(request):
+        user_authenticated = request.user.is_authenticated
+        email_not_confirmed = not request.user.email_confirmed if user_authenticated else False
+
+        context = {
+            'user_authenticated': user_authenticated,
+            'email_not_confirmed': email_not_confirmed,
+        }
+
+        return render(request, 'Notice_board/announcement_list.html', context)
 
 
 class AnnouncementsDetailViev(DetailView):
@@ -48,8 +54,18 @@ class AnnouncementsDetailViev(DetailView):
         context['email_not_confirmed'] = not self.request.user.groups.filter(name = 'email_confirmed').exists()
         # context['is_not_author'] = not self.request.user.groups.filter(name = 'authors').exists()
 
-
         return context
+
+    def auth_check(request):
+        user_authenticated = request.user.is_authenticated
+        email_not_confirmed = not request.user.email_confirmed if user_authenticated else False
+
+        context = {
+            'user_authenticated': user_authenticated,
+            'email_not_confirmed': email_not_confirmed,
+        }
+
+        return render(request, 'Notice_board/announcement_list.html', context)
 
 
 def create_response(requset):
@@ -63,17 +79,18 @@ def create_response(requset):
 
     return render(requset, 'Notice_board/announcement_detail.html', {'form': form})
 
-class AnnouncementCreate(PermissionRequiredMixin, CreateView):
-    permission_required = ('announcement.add_announcement')
+class AnnouncementCreate(CreateView):
+    # permission_required = ('announcement.add_announcement')
     form_class = AnnouncementForm
     model = Announcement
     template_name = 'Notice_board/announcement_create.html'
     context_object_name = 'announcement_create'
-    success_url = reverse_lazy('announcement_detail')
 
     def form_valid(self, form):
-        post = form.save(commit=False)
-        post.save()
+        announcement = form.save(commit=False)
+        user_profile = get_object_or_404(UserProfile, user=self.request.user)
+        announcement.user = user_profile
+
         return super().form_valid(form)
 
     def get_context_data(self, **kwargs):

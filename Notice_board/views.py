@@ -88,8 +88,7 @@ class AnnouncementCreate(CreateView):
 
     def form_valid(self, form):
         announcement = form.save(commit=False)
-        user_profile = get_object_or_404(UserProfile, user=self.request.user)
-        announcement.user = user_profile
+        announcement.user = UserProfile.objects.get(id=self.request.user.id)
 
         return super().form_valid(form)
 

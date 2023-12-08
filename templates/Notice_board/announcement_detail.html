@@ -16,7 +16,7 @@
   </div>
  <hr>
 
-  <a href="{% url 'Notice_board:reply_to' %}?announcement_id={{ announcement.id }}">
+  <a href="{% url 'Notice_board:reply_to' announcement_detail.id %}">
     <button>Add Response</button>
   </a>
 <script type="text/javascript" src="{% static 'style/js/scripts.js' %}"></script>

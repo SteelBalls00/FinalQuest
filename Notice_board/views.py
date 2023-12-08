@@ -65,14 +65,15 @@ class CreateResponse(LoginRequiredMixin, CreateView):
         model = Response
         template_name = 'Notice_board/response_create.html'
 
-
         def form_valid(self, form):
             response = form.save(commit=False)
-            user_profile = UserProfile.objects.get(user=self.request.user)
-            response.user = user_profile
-            response.announcement_id = self.request.GET.get('announcement_id')
+            response.user = self.request.user
+            response.announcement_id = self.kwargs['pk']
             response.save()
             return super().form_valid(form)
+
+        def get_success_url(self):
+            return reverse_lazy('Notice_board:announcement_detail', kwargs={'pk': self.kwargs['pk']})
 
 
 

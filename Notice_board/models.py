@@ -78,6 +78,3 @@ class Response(models.Model):
 
     def __str__(self):
         return f'Reaction on {self.user}\'s {self.announcement}'
-
-    def get_absolute_url(self):
-        return reverse('Notice_board:reply_to', args=[str(self.id)])

@@ -53,8 +53,8 @@ class AnnouncementsDetailViev(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['image_url'] = "http://127.0.0.1:8000/media/" + str(self.object.image)
-        context['email_not_confirmed'] = not self.request.user.groups.filter(name = 'email_confirmed').exists()
-        # context['is_not_author'] = not self.request.user.groups.filter(name = 'authors').exists()
+        context['email_not_confirmed'] = not self.request.user.groups.filter(name='email_confirmed').exists()
+        context['responses'] = self.object.Response_announcement.all()
 
         return context
 

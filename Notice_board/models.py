@@ -78,3 +78,6 @@ class Response(models.Model):
 
     def __str__(self):
         return f'Reaction on {self.user}\'s {self.announcement}'
+
+class SubscribedUsers(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)

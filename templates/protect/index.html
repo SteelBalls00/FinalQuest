@@ -4,7 +4,36 @@
 <h2>Страница авторизованного пользователя {{request.user.username}}</h2>
 <div> Здесь может содержаться персональная информация для каждого пользователя </div>
 
-
-
 <button> <a href="sign/logout/">Выйти</a> </button>
+
+
+{% if responses %}
+
+        {% for response in responses %}
+
+            <div>
+            <table>
+   <td> <h1><a href="http://127.0.0.1:8000/announcements/{{ response.announcement.id }}">{{ response.announcement.title|truncatechars:50 }}</a></h1></td>
+    <td><p>{{ response.content|truncatechars:80 }}</p></td>
+               <td> <p>Отклик от {{ response.user.username }}</p></td>
+      <br>
+    <td><span class="date">Категория: {{ response.announcement.category }} от {{ response.announcement.time_create }}</span></td>
+  <hr>
+<td><h1><a href="/response/{{ response.id }}/delete">Удалить отклик</a></h1></td>
+<td><h1><a href="/response/{{ response.id }}/accept">Принять отклик</a></h1></td>
+
+  <br>
+       </table>
+  </div>
+
+    {% endfor %}
+
+        {% else %}
+    <table>
+<h2>Откликов нет!</h2>
+</table>
+{% endif %}
+
+
+
 {% endblock %}

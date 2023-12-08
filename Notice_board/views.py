@@ -77,7 +77,7 @@ class CreateResponse(LoginRequiredMixin, CreateView):
 
 
 
-class AnnouncementCreate(CreateView):
+class AnnouncementCreate(LoginRequiredMixin, CreateView):
     # permission_required = ('announcement.add_announcement')
     form_class = AnnouncementForm
     model = Announcement

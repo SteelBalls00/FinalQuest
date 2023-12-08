@@ -14,30 +14,11 @@
 
 
   </div>
-<form action="" method="post">
-{% csrf_token %}
+ <hr>
 
-<table>
-<tr>
-    <th><label for="id_content">Оставить отзыв:</label></th>
-    <td>
-
-      <textarea name="content" cols="40" rows="10" required id="id_content">
-Добрый день! ...</textarea>
-
-    </td>
-    <td>
-        {% if not email_not_confirmed %}
-        <input type="submit" value="Save">
-            {% else %}
-            <button type="button" disabled>Откликнуться</button>
-            <h1>Оставить отклик можно только с подтвержденной электронной почтой</h1>
-        {% endif %}
-    </td>
-  </tr>
-
-</table>
-</form>
+  <a href="{% url 'Notice_board:reply_to' %}?announcement_id={{ announcement.id }}">
+    <button>Add Response</button>
+  </a>
 <script type="text/javascript" src="{% static 'style/js/scripts.js' %}"></script>
 
 {% endblock content %}

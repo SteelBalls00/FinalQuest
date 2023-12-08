@@ -1,0 +1,15 @@
+{% extends 'Notice_board/base.html' %}
+{% load static %}
+
+{% block content %}
+<h1>Add response</h1>
+<hr>
+<form action="" method="post">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <input type="submit" value="Save">
+
+</form>
+<script type="text/javascript" src="{% static 'style/js/scripts.js' %}"></script>
+s
+{% endblock content %}

@@ -66,7 +66,7 @@ class Announcement(models.Model):
         return f'{self.title}: {self.content[:10]}'
 
     def get_absolute_url(self):
-        return reverse('announcement_detail', args=[str(self.id)])
+        return reverse('Notice_board:announcement_detail', args=[str(self.id)])
 
 
 class Response(models.Model):
@@ -78,3 +78,6 @@ class Response(models.Model):
 
     def __str__(self):
         return f'Reaction on {self.user}\'s {self.announcement}'
+
+    def get_absolute_url(self):
+        return reverse('Notice_board:reply_to', args=[str(self.id)])

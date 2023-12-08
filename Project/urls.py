@@ -22,6 +22,7 @@ from . import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('ckeditor/', include('ckeditor_uploader.urls')),
     # path('', include('Notice_board.urls')),
     path('', include('protect.urls')),
     path('sign/', include('sign.urls')),
